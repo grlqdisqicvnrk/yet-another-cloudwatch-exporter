@@ -295,12 +295,14 @@ func startScraper(c *cli.Context) error {
 		}
 
 		logger.Info("Parsing config")
+		logger.Info("123456")
 		newCfg := config.ScrapeConf{}
 		newJobsCfg, err := newCfg.Load(configFile, logger)
 		if err != nil {
-			logger.Error(err, "Couldn't read config file", "path", configFile)
+			logger.Error(err, "Couldn't read config file 123", "path", configFile)
 			return
 		}
+
 
 		logger.Info("Reset clients cache")
 		cache = v1.NewFactory(logger, newJobsCfg, fips)
@@ -322,7 +324,7 @@ func startScraper(c *cli.Context) error {
 		go s.decoupled(ctx, logger, newJobsCfg, cache)
 	})
 
-	logger.Info("Yace startup completed", "version", version, "feature_flags", strings.Join(featureFlags, ","))
+	logger.Info("Yace startup1 completed", "version", version, "feature1_flags", strings.Join(featureFlags, ","))
 
 	srv := &http.Server{Addr: addr, Handler: mux}
 	return srv.ListenAndServe()
